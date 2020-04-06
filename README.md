@@ -24,13 +24,19 @@ stern -n default .
 k delete -f C-broker-trigger/
 k label namespace default knative-eventing-injection=disabled --overwrite
 k delete broker -n default default
+```
 
+```
 # PHASE 2: enable proxy settings (to a proxy that blocks everything except google.com and quay.io)
 
 k apply -f 99-openshift-proxy.yaml
 # wait until following looks good
 k get nodes
 
+```
+
+
+```
 # PHASE 3: try again with no internet connection
 
 k apply -f A-source-to-sink/
