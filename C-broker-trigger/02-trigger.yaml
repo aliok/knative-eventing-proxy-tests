@@ -1,0 +1,14 @@
+apiVersion: eventing.knative.dev/v1alpha1
+kind: Trigger
+metadata:
+  name: helloaloha
+  annotations:
+    knative-eventing-injection: enabled
+spec:
+  broker: default
+  subscriber:
+    ref:
+     apiVersion: serving.knative.dev/v1
+     kind: Service
+     name: eventingaloha
+

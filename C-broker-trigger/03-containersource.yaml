@@ -1,0 +1,24 @@
+apiVersion: sources.eventing.knative.dev/v1alpha1
+kind: ContainerSource
+metadata:
+  name: test-heartbeats
+spec:
+  template:
+    spec:
+      containers:
+        # This corresponds to a heartbeats image uri you build and publish,
+        # e.g. gcr.io/[gcloud-project]/github.com/knative/eventing-contrib/cmd/heartbeats
+        - image: quay.io/openshift-knative/knative-eventing-sources-heartbeats:v0.13.0
+          name: heartbeats
+          args:
+            - --period=1
+          env:
+            - name: POD_NAME
+              value: "mypod"
+            - name: POD_NAMESPACE
+              value: "event-test"
+  sink:
+    ref:
+      apiVersion: eventing.knative.dev/v1beta1
+      kind: Broker
+      name: default

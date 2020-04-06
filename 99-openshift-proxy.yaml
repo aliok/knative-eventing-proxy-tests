@@ -1,0 +1,12 @@
+apiVersion: config.openshift.io/v1
+kind: Proxy
+metadata:
+  name: cluster
+spec:
+  httpProxy: http://foo-bar:8118
+  httpsProxy: http://foo-bar:8118
+  readinessEndpoints:
+  - http://www.google.com
+  - https://www.google.com
+  trustedCA:
+    name: ""
