@@ -1,0 +1,22 @@
+apiVersion: sources.knative.dev/v1alpha1
+kind: CamelSource
+metadata:
+  name: camel-timer-source
+spec:
+  source:
+    flow:
+      from:
+        uri: timer:tick
+        parameters:
+          period: 3s
+        steps:
+        - set-header:
+            name: Content-Type
+            constant: text/plain
+        - set-body:
+            constant: Hello world!
+  sink:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: camel-event-display

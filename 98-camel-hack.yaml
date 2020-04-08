@@ -1,0 +1,11 @@
+# hack for https://github.com/knative/eventing-contrib/blob/4f4d1cf090991878d4fcfc61a4f3c7f32075233b/camel/source/pkg/install/install.go#L67
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: hack-foo-bar
+  labels:
+    app: camel-k
+rules:
+- apiGroups: [""]
+  resources: ["secrets"]
+  verbs: ["list"]

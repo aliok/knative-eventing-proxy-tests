@@ -1,0 +1,13 @@
+apiVersion: sources.knative.dev/v1alpha1
+kind: KafkaSource
+metadata:
+  name: kafka-source
+spec:
+  consumerGroup: knative-group
+  bootstrapServers: a01a72148b1c94f0db2852060c5cc3ba-560350671.us-east-2.elb.amazonaws.com:9094 
+  topics: knative-demo-topic
+  sink:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: eventinghello
